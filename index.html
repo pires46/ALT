@@ -1,0 +1,196 @@
+<!--Voxtri-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Alternative PvP - GTA V RolePlay</title>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <div id="align"></div>
+
+    <div class="info">
+      Mais informações: <a href="https://discord.gg/V3SjRMwARG" title="Discord"><img src="discord.png"/></a>
+      <a href="https://www.instagram.com/alternative_pvp/" title="Instagram"><img src="instagram.png"/></a>
+      <!-- <a href="https://twitter.com/alternative_pvp" title="Twitter"><img src="twitter.png"/></a> -->
+      <!-- <a href="https://www.facebook.com/cidadealtarp" title="Facebook"><img src="facebook.png"/></a> -->
+    </div>
+
+    <audio src="musi.mp3" autoplay loop></audio>
+    <video width="1920" height="1080" autoplay="autoplay" muted="muted">
+    <source src="alt.mp4" type="video/mp4" auto play loop/>
+    </video>
+
+    <script src="index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lettering.js/0.6.1/jquery.lettering.min.js"></script>
+    <script type="text/javascript">
+      var audio;
+      var firstPlayed = false;
+      var lastVolume = 0;
+      var upSound = 0.02;
+      var downSound = 0.02;
+
+      $(document).ready(function() {
+        audio = $("audio").get(0);
+      });
+
+      $("video").on("ended", function() {
+        this.load();
+        this.play();
+      });
+
+      $("audio").on("ended", function() {
+        this.load();
+        this.play();
+      });
+
+      document.addEventListener("keypress", event => {
+        if (!event) return;
+
+        var keyP = event.key.toLowerCase();
+        var cod = event.keyCode;
+
+        if (keyP == "p") {
+          if (audio.paused) return audio.play();
+          else return audio.pause();
+        }
+
+        if (keyP == "w" && audio.volume + upSound <= 1)
+          return (audio.volume += upSound);
+        else if (keyP == "w" && audio.volume + upSound >= 1)
+          return (audio.volume = 1);
+        else if (keyP == "s" && audio.volume - upSound >= 0)
+          return (audio.volume -= upSound);
+        else if (keyP == "s" && audio.volume - upSound <= 0)
+          return (audio.volume = 0);
+        else if (keyP == "a")
+          return (audio.currentTime -= 3);
+        else if (keyP == "d")
+          return (audio.currentTime += 3);
+      });
+
+      function audioVolumeIn(q) {
+        if (q.volume || q.volume == 0) {
+          var InT = 0;
+          var setVolume = firstPlayed ? lastVolume : 0.3; 
+          var speed = 0.01; 
+          q.volume = InT;
+          var eAudio = setInterval(function() {
+            InT += speed;
+            q.volume = InT.toFixed(1);
+            if (InT.toFixed(1) >= setVolume) {
+              clearInterval(eAudio);
+            }
+          }, 25);
+        }
+      }
+
+      function audioVolumeOut(q) {
+        lastVolume = q.volume;
+        if (q.volume || q.volume == 0) {
+          var InT = q.volume;
+          var setVolume = 0; 
+          var speed = 0.002; 
+          q.volume = InT;
+          var fAudio = setInterval(function() {
+            InT -= speed;
+            q.volume = InT.toFixed(1);
+            if (InT.toFixed(1) <= setVolume) {
+              clearInterval(fAudio);
+
+            }
+          }, 25);
+        }
+      }
+    </script>
+
+<script>
+  if (document.addEventListener) {
+      document.addEventListener("keydown", bloquearSource);
+  } else { 
+      document.attachEvent("onkeydown", bloquearSource);
+  }
+  
+  function bloquearSource(e) {
+      e = e || window.event;
+  
+      var code = e.which || e.keyCode;
+  
+      if (
+          e.ctrlKey &&
+          (code == 83 || code == 85) 
+      ) {
+          if (e.preventDefault) {
+              e.preventDefault();
+          } else {
+              e.returnValue = false;
+          }
+  
+          return false;
+      }
+  }
+  </script>
+
+
+<style>
+/*AQUI PARA BAIXO DESATIVA QUALQUER TENTATIVA DE COPIAR O SITE */
+</style>
+
+<style>
+/*desabilita a seleção no body*/
+body {
+  -webkit-touch-callout: none; 
+    -webkit-user-select: none; 
+     -khtml-user-select: none; 
+       -moz-user-select: none; 
+        -ms-user-select: none; 
+            user-select: none;
+}
+
+/*habilita a seleção nos campos editaveis*/
+input, textarea {
+  -webkit-touch-callout: initial; 
+    -webkit-user-select: text; 
+     -khtml-user-select: text; 
+       -moz-user-select: text; 
+        -ms-user-select: text; 
+            user-select: text;
+}
+
+/*habilita a seleção nos campos com o atributo contenteditable*/
+[contenteditable=true] {
+  -webkit-touch-callout: initial; 
+    -webkit-user-select: all; 
+     -khtml-user-select: all; 
+       -moz-user-select: all;
+        -ms-user-select: all; 
+            user-select: all;
+}
+</style>
+
+<script>
+if (document.addEventListener) {
+  document.addEventListener("contextmenu", function(e) {
+      e.preventDefault();
+      return false;
+  });
+} else { //Versões antigas do IE
+  document.attachEvent("oncontextmenu", function(e) {
+      e = e || window.event;
+      e.returnValue = false;
+      return false;
+  });
+}
+</script>
+
+<!--Voxtri-->
+  </body>
+</html>
